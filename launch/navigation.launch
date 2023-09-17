@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <!-- Arguments -->
+
+   <arg name="map_file" default="$(find rmp01_bot_description)/launch/final_world.yaml"/>  
+  <arg name="move_forward_only" default="true"/>
+
+  <!-- Map server for Map-based Navigation-->
+ 
+	 <node pkg="map_server" name="map_server" type="map_server" args="$(find rmp01_bot_description)/maps/map006.yaml"/>
+
+ <!-- AMCL -->
+  <include file="$(find rmp01_bot_description)/launch/amcl.launch"/>
+
+
+  <!-- move_base -->
+  <include file="$(find rmp01_bot_description)/launch/move_base.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include>
+
+
+  <!-- rviz -->
+   <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find rmp01_bot_description)/launch/urdf.rviz"/>
+
+  <node name="poseservice" pkg="rmp01" type="displacement.py" output="screen"/> 
+
+</launch>

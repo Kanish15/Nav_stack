@@ -1,0 +1,145 @@
+<?xml version="1.0" ?>
+<robot name="rmp01_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rmp01_bot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rmp01_bot_description)/urdf/rmp01_bot.trans" />
+<xacro:include filename="$(find rmp01_bot_description)/urdf/rmp01_bot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0014061657490346212 0.0 0.03770205101716623" rpy="0 0 0"/>
+    <mass value="0.8569753987977322"/>
+    <inertia ixx="0.00156" iyy="0.002508" izz="0.003853" ixy="0.0" iyz="0.0" ixz="-1.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+<!--camera link-->
+
+<link name="camera_link"/>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-1.4932499681208355e-14 -0.0050000000000000044 0.0" rpy="0 0 0"/>
+    <mass value="0.0255647102185869"/>
+    <inertia ixx="6e-06" iyy="1.2e-05" izz="6e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 0.095 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.055 0.095 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="-1.4932499681208355e-14 0.0050000000000000044 0.0" rpy="0 0 0"/>
+    <mass value="0.0255647102185869"/>
+    <inertia ixx="6e-06" iyy="1.2e-05" izz="6e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055 -0.095 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.055 -0.095 -0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_1">
+  <inertial>
+    <origin xyz="-0.03245000000000038 -8.011095240340356e-19 -0.007248183328440988" rpy="0 0 0"/>
+    <mass value="0.18317584410379573"/>
+    <inertia ixx="2.3e-05" iyy="2.3e-05" izz="3.9e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1 -0.0 -0.0225" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1 -0.0 -0.0225" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="0.0 0.0 0.0050000000000000044" rpy="0 0 0"/>
+    <mass value="0.22195352097611892"/>
+    <inertia ixx="5.2e-05" iyy="5.2e-05" izz="0.0001" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.0775" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.0775" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rmp01_bot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+<joint name="camera_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera_link"/>
+  </joint>
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="-0.055 -0.095 0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="-0.055 0.095 0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="caster_joint" type="fixed">
+  <origin xyz="0.1 0.0 0.0225" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="caster_1"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.0775" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>
